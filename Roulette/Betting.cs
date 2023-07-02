@@ -17,6 +17,9 @@ namespace Roulette
         public Point initialLocation { get; set; }
 
         public List<Bet> bets { get; set; } = new List<Bet>();
+        public Bet Red { get; set; }
+        public Bet Black { get; set; }
+        public Bet Green {  get; set; }
         public Betting(Point location, int width, int height, Size size)
         {
             initialLocation = location;
@@ -36,7 +39,7 @@ namespace Roulette
 
                 numberSquares.Add(square);
 
-                locX += 35 + spacing;
+                locX += 30 + spacing;
 
                 // Move to the next row after every squaresPerRow
                 if (i % squaresPerRow == 0)
@@ -72,31 +75,6 @@ namespace Roulette
             //greenSquare.Draw(g);
         }
 
-        public void Click(Point location, int amount)
-        {
-            foreach(Square square in numberSquares)
-            {
-                if (square.isClicked(location))
-                {
-                    bets.Add(new Bet(square.Number, amount, square.Color));
-                }
-            }
-
-           /* if (blackSquare.isClicked(location))
-            {
-                blackSquare.Clicked = true;
-            }
-
-            if (redSquare.isClicked(location))
-            {
-                redSquare.Clicked = true;
-            }
-
-            if (greenSquare.isClicked(location))
-            {
-                greenSquare.Clicked = true;
-            }*/
-        }
-   
+       
     }
 }

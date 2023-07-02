@@ -11,13 +11,10 @@ namespace Roulette
         public int Number { get; set; }
         public int Amount { get; set; }
 
-        public Color Color { get; set; }
-
-        public Bet(int number, int amount, Color color)
+        public Bet(int number, int amount)
         {
             Number = number;
             Amount = amount;
-            Color = color;
         }
 
         public override string? ToString()
