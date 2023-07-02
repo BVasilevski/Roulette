@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.Devices;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
@@ -62,8 +64,10 @@ namespace Roulette
 
         public bool isClicked(Point location)
         {
-            Clicked = Math.Sqrt(Math.Pow(location.X - Center.X, 2) + Math.Pow(location.Y - Center.Y, 2)) < Width 
-                || Math.Sqrt(Math.Pow(location.X - Center.X, 2) + Math.Pow(location.Y - Center.Y, 2)) < Height;
+            Clicked = Math.Sqrt(Math.Pow(location.X - Center.X, 2) +  Math.Pow(location.Y - Center.Y, 2)) <= Width 
+             || Math.Sqrt(Math.Pow(location.X - Center.X, 2) + Math.Pow(location.Y - Center.Y, 2)) <= Height;
+
+
             return Clicked;
         }
     }

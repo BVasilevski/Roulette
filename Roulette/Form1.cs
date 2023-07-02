@@ -59,13 +59,16 @@
             this.DoubleBuffered = true;
             this.BackColor = Color.Green;
 
-            wheelImage = Image.FromFile("D:\\Fakultet\\II Godina\\IV Semestar\\Vizuelno Programiranje\\Roulette\\VPProject\\wheel.png");
+            wheelImage = Image.FromFile("wheel.png");
             pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
             pictureBox1.TabStop = false;
             pictureBox1.BackColor = Color.Green;
             pictureBox1.Size = wheelImage.Size;
             pictureBox1.Image = wheelImage;
             pictureBox1.Location = new Point((30), (this.ClientSize.Height - pictureBox1.Height) / 2);
+
+            currentBetsList.BackColor = Color.Green;
+            spinButton.Location = new Point(this.Width / 2, spinButton.Location.Y);
 
             table = new Betting(pictureBox1.Location, this.Width, this.Height, pictureBox1.Size);
             ball = new Ball(new Point(200, 65));
@@ -104,7 +107,7 @@
         private void timer1_Tick_1(object sender, EventArgs e)
         {
             rotationAngle += rotationSpeed;
-            rotationAngle %= 360;          
+            rotationAngle %= 360;
             pictureBox1.Image = RotateImage(wheelImage, rotationAngle);
             pictureBox1.Refresh(); // Forces immediate redraw of the PictureBox
             ball.UpdatePosition();
@@ -130,6 +133,7 @@
         {
             ball = new Ball(new Point(200, 65));
             timerBall.Start();
+            showCurrentBets();
             duration = tickValues[random.Next(tickValues.Count)];
             ticks = 0;
             pictureBox1.Invalidate();
@@ -140,7 +144,7 @@
         }
 
         private void timerBall_Tick(object sender, EventArgs e)
-        {    
+        {
             ticks++;
             ball.UpdatePosition();
 
@@ -153,12 +157,36 @@
             {
                 timerBall.Stop();
                 drawnNumber = numbers[duration];
+                table.bets.Clear();    
             }
-           
-            label1.Text = drawnNumber.ToString();
-            label2.Text = $"Duration - {duration.ToString()}";
-            label3.Text = $"Ticks - {ticks.ToString()}";
+
+            //label1.Text = drawnNumber.ToString();
+            //label2.Text = $"Duration - {duration.ToString()}";
+            //label3.Text = $"Ticks - {ticks.ToString()}";
             pictureBox1.Invalidate();
+        }
+
+        private void currentBetsList_MouseClick(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        public void showCurrentBets()
+        {
+            currentBetsList.Items.Clear();
+            if (table.bets.Count > 0)
+            {
+                foreach (Bet bet in table.bets)
+                {
+                    currentBetsList.Items.Add(bet);
+                }
+            }  
+        }
+
+        private void Form1_MouseClick(object sender, MouseEventArgs e)
+        {
+            table.Click(e.Location, 50);
+            //Invalidate();
         }
     }
 }
