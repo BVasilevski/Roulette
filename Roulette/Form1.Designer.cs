@@ -79,13 +79,16 @@
             label3 = new Label();
             tbCurrentBalance = new TextBox();
             btnDepositMoney = new Button();
+            btnRemoveLastBet = new Button();
+            btnRemoveAllBets = new Button();
+            btnRules = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)amountNud).BeginInit();
             SuspendLayout();
             // 
             // pictureBox1
             // 
-            pictureBox1.Location = new Point(324, 410);
+            pictureBox1.Location = new Point(12, 83);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(27, 80);
             pictureBox1.TabIndex = 0;
@@ -99,9 +102,9 @@
             // 
             // spinButton
             // 
-            spinButton.Location = new Point(426, 519);
+            spinButton.Location = new Point(461, 542);
             spinButton.Name = "spinButton";
-            spinButton.Size = new Size(200, 23);
+            spinButton.Size = new Size(200, 42);
             spinButton.TabIndex = 1;
             spinButton.Text = "SPIN";
             spinButton.UseVisualStyleBackColor = true;
@@ -115,22 +118,23 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(745, 4);
+            label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Location = new Point(740, 4);
             label1.Name = "label1";
-            label1.Size = new Size(75, 15);
+            label1.Size = new Size(99, 21);
             label1.TabIndex = 2;
             label1.Text = "Current Bets:";
             // 
             // currentBetsList
             // 
+            currentBetsList.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             currentBetsList.ForeColor = SystemColors.Info;
             currentBetsList.FormattingEnabled = true;
             currentBetsList.ItemHeight = 15;
-            currentBetsList.Location = new Point(690, 22);
+            currentBetsList.Location = new Point(690, 28);
             currentBetsList.Name = "currentBetsList";
-            currentBetsList.Size = new Size(200, 484);
+            currentBetsList.Size = new Size(200, 499);
             currentBetsList.TabIndex = 5;
-            currentBetsList.MouseClick += currentBetsList_MouseClick;
             // 
             // button1
             // 
@@ -601,41 +605,46 @@
             // amountNud
             // 
             amountNud.Increment = new decimal(new int[] { 50, 0, 0, 0 });
-            amountNud.Location = new Point(564, 22);
+            amountNud.Location = new Point(476, 28);
             amountNud.Maximum = new decimal(new int[] { 100000000, 0, 0, 0 });
             amountNud.Name = "amountNud";
             amountNud.Size = new Size(120, 23);
             amountNud.TabIndex = 45;
+            amountNud.TextAlign = HorizontalAlignment.Center;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(587, 4);
+            label2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label2.Location = new Point(486, 6);
             label2.Name = "label2";
-            label2.Size = new Size(74, 15);
+            label2.Size = new Size(95, 21);
             label2.TabIndex = 46;
             label2.Text = "Bet Amount:";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(426, 4);
+            label3.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label3.Location = new Point(327, 4);
             label3.Name = "label3";
-            label3.Size = new Size(94, 15);
+            label3.Size = new Size(123, 21);
             label3.TabIndex = 47;
             label3.Text = "Current Balance:";
             // 
             // tbCurrentBalance
             // 
-            tbCurrentBalance.Location = new Point(414, 22);
+            tbCurrentBalance.Location = new Point(324, 28);
             tbCurrentBalance.Name = "tbCurrentBalance";
             tbCurrentBalance.ReadOnly = true;
-            tbCurrentBalance.Size = new Size(120, 23);
+            tbCurrentBalance.Size = new Size(126, 23);
             tbCurrentBalance.TabIndex = 48;
+            tbCurrentBalance.Text = "0";
+            tbCurrentBalance.TextAlign = HorizontalAlignment.Center;
             // 
             // btnDepositMoney
             // 
-            btnDepositMoney.Location = new Point(12, 12);
+            btnDepositMoney.Location = new Point(12, 6);
             btnDepositMoney.Name = "btnDepositMoney";
             btnDepositMoney.Size = new Size(137, 50);
             btnDepositMoney.TabIndex = 49;
@@ -643,11 +652,45 @@
             btnDepositMoney.UseVisualStyleBackColor = true;
             btnDepositMoney.Click += btnDepositMoney_Click;
             // 
+            // btnRemoveLastBet
+            // 
+            btnRemoveLastBet.Location = new Point(690, 542);
+            btnRemoveLastBet.Name = "btnRemoveLastBet";
+            btnRemoveLastBet.Size = new Size(89, 42);
+            btnRemoveLastBet.TabIndex = 50;
+            btnRemoveLastBet.Text = "Remove Last Bet";
+            btnRemoveLastBet.UseVisualStyleBackColor = true;
+            btnRemoveLastBet.Click += btnRemoveLastBet_Click;
+            // 
+            // btnRemoveAllBets
+            // 
+            btnRemoveAllBets.Location = new Point(798, 542);
+            btnRemoveAllBets.Name = "btnRemoveAllBets";
+            btnRemoveAllBets.Size = new Size(92, 42);
+            btnRemoveAllBets.TabIndex = 51;
+            btnRemoveAllBets.Text = "Remove All Bets";
+            btnRemoveAllBets.UseVisualStyleBackColor = true;
+            btnRemoveAllBets.Click += btnRemoveAllBets_Click;
+            // 
+            // btnRules
+            // 
+            btnRules.Location = new Point(170, 6);
+            btnRules.Name = "btnRules";
+            btnRules.Size = new Size(137, 50);
+            btnRules.TabIndex = 52;
+            btnRules.Text = "Rules";
+            btnRules.UseVisualStyleBackColor = true;
+            btnRules.Click += btnRules_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1141, 554);
+            BackColor = Color.Honeydew;
+            ClientSize = new Size(1144, 596);
+            Controls.Add(btnRules);
+            Controls.Add(btnRemoveAllBets);
+            Controls.Add(btnRemoveLastBet);
             Controls.Add(btnDepositMoney);
             Controls.Add(tbCurrentBalance);
             Controls.Add(label3);
@@ -766,5 +809,8 @@
         private Label label3;
         private TextBox tbCurrentBalance;
         private Button btnDepositMoney;
+        private Button btnRemoveLastBet;
+        private Button btnRemoveAllBets;
+        private Button btnRules;
     }
 }

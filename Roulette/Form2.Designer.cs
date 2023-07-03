@@ -83,8 +83,10 @@
             // 
             // Form2
             // 
+            AcceptButton = depositBtn;
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            CancelButton = cancelBtn;
             ClientSize = new Size(265, 119);
             Controls.Add(cancelBtn);
             Controls.Add(nudAmount);

@@ -1,16 +1,25 @@
 ﻿using System.Diagnostics.Eventing.Reader;
+using System.Media;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Runtime.InteropServices;
+using System.ComponentModel;
+
+// ...
+
+
 
 namespace Roulette
 {
+
     public partial class Form1 : Form
     {
+
         //TODO: STAVI ZA BRISENJE NA BETOVITE
         private Image wheelImage;
         private float rotationAngle = 0;
         private const float rotationSpeed = 2f;
         private Ball ball;
-        private Betting table;
+        private Betting Betting;
         private int ticks = 0;
         private Random random = new Random();
         List<int> tickValues = new List<int>();
@@ -58,6 +67,7 @@ namespace Roulette
         };
         List<Button> buttons = new List<Button>();
         private Wallet wallet = new Wallet(0);
+        private SoundPlayer player;
 
         public Form1()
         {
@@ -71,15 +81,16 @@ namespace Roulette
             pictureBox1.BackColor = Color.Green;
             pictureBox1.Size = wheelImage.Size;
             pictureBox1.Image = wheelImage;
-            pictureBox1.Location = new Point((30), (this.ClientSize.Height - pictureBox1.Height) / 2);
+            pictureBox1.Location = new Point((30), (this.ClientSize.Height - pictureBox1.Height) - 20);
 
             currentBetsList.BackColor = Color.Green;
-            spinButton.Location = new Point(this.Width / 2, spinButton.Location.Y);
             //GenerateButtons();
-            table = new Betting(pictureBox1.Location, this.Width, this.Height, pictureBox1.Size);
+            Betting = new Betting();
             ball = new Ball(new Point(200, 65));
             tickValues = new List<int>(numbers.Keys.ToArray());
             tbCurrentBalance.Text = wallet.ToString();
+            player = new SoundPlayer("clap.wav");
+
         }
 
         private Button GetButtonByText(string buttonText)
@@ -154,8 +165,6 @@ namespace Roulette
             Controls.Add(blackButton);
         }
 
-
-
         private Image RotateImage(Image image, float angle)
         {
             // Create a new bitmap with the same size as the original image
@@ -201,10 +210,17 @@ namespace Roulette
         private void button1_Click(object sender, EventArgs e)
         {
             ball = new Ball(new Point(200, 65));
-            timerBall.Start();
-            duration = tickValues[random.Next(tickValues.Count)];
-            amountNud.Value = 0;
-            ticks = 0;
+            if (Betting.bets.Count > 0)
+            {
+                timerBall.Start();
+                duration = tickValues[random.Next(tickValues.Count)];
+                amountNud.Value = 0;
+                ticks = 0;
+            }
+            else
+            {
+                MessageBox.Show("Please add some bets", "Add bets", MessageBoxButtons.OK);
+            }
             pictureBox1.Invalidate();
         }
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
@@ -216,7 +232,7 @@ namespace Roulette
         {
             ticks++;
             ball.UpdatePosition();
-
+            pictureBox1.Invalidate();
             if (ticks > 200)
             {
                 ball.RotationSpeed = 2f;
@@ -226,36 +242,36 @@ namespace Roulette
             {
                 timerBall.Stop();
                 drawnNumber = numbers[duration];
-                int amount = table.CalculateWinning(drawnNumber);
+                int amount = Betting.CalculateWinning(drawnNumber);
                 if (amount > 0)
                 {
-                    MessageBox.Show("Congratulations! You won: " + amount.ToString());
+                    player.Play();
+                    DialogResult dg = MessageBox.Show("Congratulations! You won: " + amount.ToString(), "Congratulations!", MessageBoxButtons.OK);
+                    if (dg == DialogResult.OK)
+                    {
+                        player.Stop();
+                    }
                     wallet.addValue(amount);
                     updateCurrentBalance();
                 }
-                table.bets.Clear();
+                Betting.bets.Clear();
+                showCurrentBets();
             }
-            pictureBox1.Invalidate();
-        }
-
-        private void currentBetsList_MouseClick(object sender, MouseEventArgs e)
-        {
 
         }
 
-        public void AddBets()
-        {
 
-        }
 
         public void showCurrentBets()
         {
+            int i = 1;
             currentBetsList.Items.Clear();
-            if (table.bets.Count > 0)
+            if (Betting.bets.Count > 0)
             {
-                foreach (Bet bet in table.bets)
+                foreach (Bet bet in Betting.bets)
                 {
-                    currentBetsList.Items.Add(bet);
+                    currentBetsList.Items.Add($"{i}. " + bet);
+                    i++;
                 }
             }
         }
@@ -269,13 +285,32 @@ namespace Roulette
         {
             Button button = (Button)sender;
             int number = int.Parse(button.Text);
-
+            int containedBetAmount = 0;
+            bool contains = false;
             int amount = int.Parse(amountNud.Text);
             if (int.Parse(tbCurrentBalance.Text) >= amount)
             {
                 if (amount > 0)
                 {
-                    table.bets.Add(new Bet(number, amount));
+                    for (int i = Betting.bets.Count - 1; i >= 0; i--)
+                    {
+                        if (Betting.bets[i].Number == number)
+                        {
+                            containedBetAmount = Betting.bets[i].Amount;
+                            Betting.bets.Remove(Betting.bets[i]);
+                            contains = true;
+                        }
+                    }
+
+                    if (contains)
+                    {
+                        Betting.bets.Add(new Bet(number, (amount + containedBetAmount)));
+                    }
+
+                    else
+                    {
+                        Betting.bets.Add(new Bet(number, amount));
+                    }
                     wallet.removeValue(amount);
                 }
                 else
@@ -302,7 +337,7 @@ namespace Roulette
             {
                 if (amount > 0)
                 {
-                    table.bets.Add(new Bet(number, amount));
+                    Betting.bets.Add(new Bet(number, amount));
                     wallet.removeValue(amount);
                 }
                 else
@@ -323,22 +358,38 @@ namespace Roulette
 
         private void buttonRed_Click(object sender, EventArgs e)
         {
+            bool contains = false;
             int amount = int.Parse(amountNud.Text);
+            int containedBetAmount = 0;
             if (int.Parse(tbCurrentBalance.Text) >= amount)
             {
                 if (amount > 0)
                 {
-                    table.bets.Add(new Bet(-1, amount));
+                    for (int i = Betting.bets.Count - 1; i >= 0; i--)
+                    {
+                        if (Betting.bets[i].Number == -1)
+                        {
+                            containedBetAmount = Betting.bets[i].Amount;
+                            Betting.bets.Remove(Betting.bets[i]);
+                            contains = true;
+                        }
+                    }
+
+                    if (contains)
+                    {
+                        Betting.bets.Add(new Bet(-1, (amount + containedBetAmount)));
+                    }
+
+                    else
+                    {
+                        Betting.bets.Add(new Bet(-1, amount));
+                    }
                     wallet.removeValue(amount);
                 }
                 else
                 {
                     DialogResult dg = MessageBox.Show("Please put amount for the bet", "Please put amount for the bet", MessageBoxButtons.OK);
                 }
-            }
-            else
-            {
-                DialogResult dg = MessageBox.Show("You dont have enough balance", "You dont have enough balance", MessageBoxButtons.OK);
             }
 
             updateCurrentBalance();
@@ -352,12 +403,32 @@ namespace Roulette
 
         private void buttonBlack_Click(object sender, EventArgs e)
         {
+            bool contains = false;
             int amount = int.Parse(amountNud.Text);
+            int containedBetAmount = 0;
             if (int.Parse(tbCurrentBalance.Text) >= amount)
             {
                 if (amount > 0)
                 {
-                    table.bets.Add(new Bet(-2, amount));
+                    for (int i = Betting.bets.Count - 1; i >= 0; i--)
+                    {
+                        if (Betting.bets[i].Number == -2)
+                        {
+                            containedBetAmount = Betting.bets[i].Amount;
+                            Betting.bets.Remove(Betting.bets[i]);
+                            contains = true;
+                        }
+                    }
+
+                    if (contains)
+                    {
+                        Betting.bets.Add(new Bet(-2, (amount + containedBetAmount)));
+                    }
+
+                    else
+                    {
+                        Betting.bets.Add(new Bet(-2, amount));
+                    }
                     wallet.removeValue(amount);
                 }
                 else
@@ -382,6 +453,29 @@ namespace Roulette
                 wallet.addValue(form.amount);
                 updateCurrentBalance();
             }
+        }
+
+        private void btnRemoveLastBet_Click(object sender, EventArgs e)
+        {
+            if (Betting.bets.Count > 0)
+            {
+                Betting.RemoveLastBet(wallet);
+            }
+            showCurrentBets();
+            updateCurrentBalance();
+        }
+
+        private void btnRemoveAllBets_Click(object sender, EventArgs e)
+        {
+            Betting.RemoveAllBets(wallet);
+            showCurrentBets();
+            updateCurrentBalance();
+        }
+
+        private void btnRules_Click(object sender, EventArgs e)
+        {
+            RulesForm form = new RulesForm();
+            form.ShowDialog();
         }
     }
 }
