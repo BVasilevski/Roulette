@@ -19,7 +19,18 @@ namespace Roulette
 
         public override string? ToString()
         {
-            return $"Number: {Number} - Amount: {Amount}";
+            if (Number == -1)
+            {
+                return $"Color: Red - Amount {Amount}";
+            }
+            else if (Number == -2)
+            {
+                return $"Color: Black - Amount {Amount}";
+            }
+            else
+            {
+                return $"Number: {Number} - Amount: {Amount}";
+            }
         }
     }
 }

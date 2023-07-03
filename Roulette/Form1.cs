@@ -1,7 +1,11 @@
-﻿namespace Roulette
+﻿using System.Diagnostics.Eventing.Reader;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+
+namespace Roulette
 {
     public partial class Form1 : Form
     {
+        //TODO: STAVI ZA BRISENJE NA BETOVITE
         private Image wheelImage;
         private float rotationAngle = 0;
         private const float rotationSpeed = 2f;
@@ -53,6 +57,7 @@
             { 423, 12 }
         };
         List<Button> buttons = new List<Button>();
+        private Wallet wallet = new Wallet(0);
 
         public Form1()
         {
@@ -74,6 +79,7 @@
             table = new Betting(pictureBox1.Location, this.Width, this.Height, pictureBox1.Size);
             ball = new Ball(new Point(200, 65));
             tickValues = new List<int>(numbers.Keys.ToArray());
+            tbCurrentBalance.Text = wallet.ToString();
         }
 
         private Button GetButtonByText(string buttonText)
@@ -197,6 +203,7 @@
             ball = new Ball(new Point(200, 65));
             timerBall.Start();
             duration = tickValues[random.Next(tickValues.Count)];
+            amountNud.Value = 0;
             ticks = 0;
             pictureBox1.Invalidate();
         }
@@ -219,6 +226,13 @@
             {
                 timerBall.Stop();
                 drawnNumber = numbers[duration];
+                int amount = table.CalculateWinning(drawnNumber);
+                if (amount > 0)
+                {
+                    MessageBox.Show("Congratulations! You won: " + amount.ToString());
+                    wallet.addValue(amount);
+                    updateCurrentBalance();
+                }
                 table.bets.Clear();
             }
             pictureBox1.Invalidate();
@@ -257,28 +271,52 @@
             int number = int.Parse(button.Text);
 
             int amount = int.Parse(amountNud.Text);
-            if (amount > 0)
+            if (int.Parse(tbCurrentBalance.Text) >= amount)
             {
-                table.bets.Add(new Bet(number, amount));
+                if (amount > 0)
+                {
+                    table.bets.Add(new Bet(number, amount));
+                    wallet.removeValue(amount);
+                }
+                else
+                {
+                    DialogResult dg = MessageBox.Show("Please put amount for the bet", "Please put amount for the bet", MessageBoxButtons.OK);
+                }
             }
             else
             {
-                DialogResult dg = MessageBox.Show("Please put amount for the bet", "Please put amount for the bet", MessageBoxButtons.OK);
+                DialogResult dg = MessageBox.Show("You dont have enough balance", "You dont have enough balance", MessageBoxButtons.OK);
             }
+
+            updateCurrentBalance();
             showCurrentBets();
         }
 
         private void button0_Click(object sender, EventArgs e)
         {
+            Button button = (Button)sender;
+            int number = int.Parse(button.Text);
             int amount = int.Parse(amountNud.Text);
-            if (amount > 0)
+
+            if (int.Parse(tbCurrentBalance.Text) >= amount)
             {
-                table.bets.Add(new Bet(0, amount));
+                if (amount > 0)
+                {
+                    table.bets.Add(new Bet(number, amount));
+                    wallet.removeValue(amount);
+                }
+                else
+                {
+                    DialogResult dg = MessageBox.Show("Please put amount for the bet", "Please put amount for the bet", MessageBoxButtons.OK);
+                }
             }
+
             else
             {
-                DialogResult dg = MessageBox.Show("Please put amount for the bet", "Please put amount for the bet", MessageBoxButtons.OK);
+                DialogResult dg = MessageBox.Show("You dont have enough balance", "You dont have enough balance", MessageBoxButtons.OK);
             }
+
+            updateCurrentBalance();
             showCurrentBets();
         }
 
@@ -286,29 +324,64 @@
         private void buttonRed_Click(object sender, EventArgs e)
         {
             int amount = int.Parse(amountNud.Text);
-            if (amount > 0)
+            if (int.Parse(tbCurrentBalance.Text) >= amount)
             {
-                table.Red = new Bet(-1, amount);
+                if (amount > 0)
+                {
+                    table.bets.Add(new Bet(-1, amount));
+                    wallet.removeValue(amount);
+                }
+                else
+                {
+                    DialogResult dg = MessageBox.Show("Please put amount for the bet", "Please put amount for the bet", MessageBoxButtons.OK);
+                }
             }
             else
             {
-                DialogResult dg = MessageBox.Show("Please put amount for the bet", "Please put amount for the bet", MessageBoxButtons.OK);
+                DialogResult dg = MessageBox.Show("You dont have enough balance", "You dont have enough balance", MessageBoxButtons.OK);
             }
+
+            updateCurrentBalance();
             showCurrentBets();
+        }
+
+        private void updateCurrentBalance()
+        {
+            tbCurrentBalance.Text = wallet.ToString();
         }
 
         private void buttonBlack_Click(object sender, EventArgs e)
         {
             int amount = int.Parse(amountNud.Text);
-            if (amount > 0)
+            if (int.Parse(tbCurrentBalance.Text) >= amount)
             {
-                table.Black = new Bet(-1, amount);
+                if (amount > 0)
+                {
+                    table.bets.Add(new Bet(-2, amount));
+                    wallet.removeValue(amount);
+                }
+                else
+                {
+                    DialogResult dg = MessageBox.Show("Please put amount for the bet", "Please put amount for the bet", MessageBoxButtons.OK);
+                }
             }
             else
             {
-                DialogResult dg = MessageBox.Show("Please put amount for the bet", "Please put amount for the bet", MessageBoxButtons.OK);
+                DialogResult dg = MessageBox.Show("You dont have enough balance", "You dont have enough balance", MessageBoxButtons.OK);
             }
+
+            updateCurrentBalance();
             showCurrentBets();
+        }
+
+        private void btnDepositMoney_Click(object sender, EventArgs e)
+        {
+            Form2 form = new Form2();
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                wallet.addValue(form.amount);
+                updateCurrentBalance();
+            }
         }
     }
 }

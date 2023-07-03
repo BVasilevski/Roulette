@@ -75,6 +75,10 @@
             buttonRed = new Button();
             buttonBlack = new Button();
             amountNud = new NumericUpDown();
+            label2 = new Label();
+            label3 = new Label();
+            tbCurrentBalance = new TextBox();
+            btnDepositMoney = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)amountNud).BeginInit();
             SuspendLayout();
@@ -97,7 +101,7 @@
             // 
             spinButton.Location = new Point(426, 519);
             spinButton.Name = "spinButton";
-            spinButton.Size = new Size(75, 23);
+            spinButton.Size = new Size(200, 23);
             spinButton.TabIndex = 1;
             spinButton.Text = "SPIN";
             spinButton.UseVisualStyleBackColor = true;
@@ -111,7 +115,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(687, 4);
+            label1.Location = new Point(745, 4);
             label1.Name = "label1";
             label1.Size = new Size(75, 15);
             label1.TabIndex = 2;
@@ -122,9 +126,9 @@
             currentBetsList.ForeColor = SystemColors.Info;
             currentBetsList.FormattingEnabled = true;
             currentBetsList.ItemHeight = 15;
-            currentBetsList.Location = new Point(563, 22);
+            currentBetsList.Location = new Point(690, 22);
             currentBetsList.Name = "currentBetsList";
-            currentBetsList.Size = new Size(338, 484);
+            currentBetsList.Size = new Size(200, 484);
             currentBetsList.TabIndex = 5;
             currentBetsList.MouseClick += currentBetsList_MouseClick;
             // 
@@ -238,7 +242,7 @@
             // 
             // button11
             // 
-            button11.BackColor = SystemColors.ActiveCaptionText;
+            button11.BackColor = Color.Red;
             button11.ForeColor = SystemColors.ButtonFace;
             button11.Location = new Point(980, 169);
             button11.Name = "button11";
@@ -250,7 +254,7 @@
             // 
             // button12
             // 
-            button12.BackColor = Color.Red;
+            button12.BackColor = Color.Black;
             button12.ForeColor = SystemColors.ButtonFace;
             button12.Location = new Point(1036, 169);
             button12.Name = "button12";
@@ -274,7 +278,7 @@
             // 
             // button14
             // 
-            button14.BackColor = Color.Red;
+            button14.BackColor = Color.Black;
             button14.ForeColor = SystemColors.ButtonFace;
             button14.Location = new Point(980, 205);
             button14.Name = "button14";
@@ -286,7 +290,7 @@
             // 
             // button15
             // 
-            button15.BackColor = SystemColors.ActiveCaptionText;
+            button15.BackColor = Color.Red;
             button15.ForeColor = SystemColors.ButtonFace;
             button15.Location = new Point(1036, 205);
             button15.Name = "button15";
@@ -298,7 +302,7 @@
             // 
             // button13
             // 
-            button13.BackColor = SystemColors.ActiveCaptionText;
+            button13.BackColor = Color.Red;
             button13.ForeColor = SystemColors.ButtonFace;
             button13.Location = new Point(924, 205);
             button13.Name = "button13";
@@ -310,7 +314,7 @@
             // 
             // button17
             // 
-            button17.BackColor = SystemColors.ActiveCaptionText;
+            button17.BackColor = Color.Red;
             button17.ForeColor = SystemColors.ButtonFace;
             button17.Location = new Point(980, 240);
             button17.Name = "button17";
@@ -322,7 +326,7 @@
             // 
             // button18
             // 
-            button18.BackColor = Color.Red;
+            button18.BackColor = Color.Black;
             button18.ForeColor = SystemColors.ButtonFace;
             button18.Location = new Point(1036, 240);
             button18.Name = "button18";
@@ -334,7 +338,7 @@
             // 
             // button16
             // 
-            button16.BackColor = Color.Red;
+            button16.BackColor = Color.Black;
             button16.ForeColor = SystemColors.ButtonFace;
             button16.Location = new Point(924, 240);
             button16.Name = "button16";
@@ -346,7 +350,7 @@
             // 
             // button35
             // 
-            button35.BackColor = SystemColors.ActiveCaptionText;
+            button35.BackColor = Color.Red;
             button35.ForeColor = SystemColors.ButtonFace;
             button35.Location = new Point(980, 455);
             button35.Name = "button35";
@@ -358,7 +362,7 @@
             // 
             // button36
             // 
-            button36.BackColor = Color.Red;
+            button36.BackColor = Color.Black;
             button36.ForeColor = SystemColors.ButtonFace;
             button36.Location = new Point(1036, 455);
             button36.Name = "button36";
@@ -370,7 +374,7 @@
             // 
             // button34
             // 
-            button34.BackColor = Color.Red;
+            button34.BackColor = Color.Black;
             button34.ForeColor = SystemColors.ButtonFace;
             button34.Location = new Point(924, 455);
             button34.Name = "button34";
@@ -382,7 +386,7 @@
             // 
             // button32
             // 
-            button32.BackColor = Color.Red;
+            button32.BackColor = Color.Black;
             button32.ForeColor = SystemColors.ButtonFace;
             button32.Location = new Point(980, 420);
             button32.Name = "button32";
@@ -394,7 +398,7 @@
             // 
             // button33
             // 
-            button33.BackColor = SystemColors.ActiveCaptionText;
+            button33.BackColor = Color.Red;
             button33.ForeColor = SystemColors.ButtonFace;
             button33.Location = new Point(1036, 420);
             button33.Name = "button33";
@@ -406,7 +410,7 @@
             // 
             // button31
             // 
-            button31.BackColor = SystemColors.ActiveCaptionText;
+            button31.BackColor = Color.Red;
             button31.ForeColor = SystemColors.ButtonFace;
             button31.Location = new Point(924, 420);
             button31.Name = "button31";
@@ -418,7 +422,7 @@
             // 
             // button29
             // 
-            button29.BackColor = SystemColors.ActiveCaptionText;
+            button29.BackColor = Color.Red;
             button29.ForeColor = SystemColors.ButtonFace;
             button29.Location = new Point(980, 384);
             button29.Name = "button29";
@@ -430,7 +434,7 @@
             // 
             // button30
             // 
-            button30.BackColor = Color.Red;
+            button30.BackColor = Color.Black;
             button30.ForeColor = SystemColors.ButtonFace;
             button30.Location = new Point(1036, 384);
             button30.Name = "button30";
@@ -596,16 +600,58 @@
             // 
             // amountNud
             // 
-            amountNud.Location = new Point(426, 39);
+            amountNud.Increment = new decimal(new int[] { 50, 0, 0, 0 });
+            amountNud.Location = new Point(564, 22);
+            amountNud.Maximum = new decimal(new int[] { 100000000, 0, 0, 0 });
             amountNud.Name = "amountNud";
             amountNud.Size = new Size(120, 23);
             amountNud.TabIndex = 45;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(587, 4);
+            label2.Name = "label2";
+            label2.Size = new Size(74, 15);
+            label2.TabIndex = 46;
+            label2.Text = "Bet Amount:";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(426, 4);
+            label3.Name = "label3";
+            label3.Size = new Size(94, 15);
+            label3.TabIndex = 47;
+            label3.Text = "Current Balance:";
+            // 
+            // tbCurrentBalance
+            // 
+            tbCurrentBalance.Location = new Point(414, 22);
+            tbCurrentBalance.Name = "tbCurrentBalance";
+            tbCurrentBalance.ReadOnly = true;
+            tbCurrentBalance.Size = new Size(120, 23);
+            tbCurrentBalance.TabIndex = 48;
+            // 
+            // btnDepositMoney
+            // 
+            btnDepositMoney.Location = new Point(12, 12);
+            btnDepositMoney.Name = "btnDepositMoney";
+            btnDepositMoney.Size = new Size(137, 50);
+            btnDepositMoney.TabIndex = 49;
+            btnDepositMoney.Text = "Deposit Money";
+            btnDepositMoney.UseVisualStyleBackColor = true;
+            btnDepositMoney.Click += btnDepositMoney_Click;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1141, 554);
+            Controls.Add(btnDepositMoney);
+            Controls.Add(tbCurrentBalance);
+            Controls.Add(label3);
+            Controls.Add(label2);
             Controls.Add(amountNud);
             Controls.Add(buttonBlack);
             Controls.Add(buttonRed);
@@ -716,5 +762,9 @@
         private Button buttonRed;
         private Button buttonBlack;
         private NumericUpDown amountNud;
+        private Label label2;
+        private Label label3;
+        private TextBox tbCurrentBalance;
+        private Button btnDepositMoney;
     }
 }

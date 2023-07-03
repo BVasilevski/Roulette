@@ -32,3 +32,4 @@ D:\Fakultet\II Godina\IV Semestar\Vizuelno Programiranje\Roulette\VPProject\Roul
 D:\Fakultet\II Godina\IV Semestar\Vizuelno Programiranje\Roulette\VPProject\Roulette\obj\Debug\net7.0-windows\Roulette.pdb
 D:\Fakultet\II Godina\IV Semestar\Vizuelno Programiranje\Roulette\VPProject\Roulette\obj\Debug\net7.0-windows\Roulette.genruntimeconfig.cache
 D:\Fakultet\II Godina\IV Semestar\Vizuelno Programiranje\Roulette\VPProject\Roulette\obj\Debug\net7.0-windows\ref\Roulette.dll
+D:\Fakultet\II Godina\IV Semestar\Vizuelno Programiranje\Roulette\VPProject\Roulette\obj\Debug\net7.0-windows\Roulette.Form2.resources
