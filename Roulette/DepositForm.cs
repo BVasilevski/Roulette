@@ -10,10 +10,10 @@ using System.Windows.Forms;
 
 namespace Roulette
 {
-    public partial class Form2 : Form
+    public partial class DepositForm : Form
     {
         public int amount;
-        public Form2()
+        public DepositForm()
         {
             InitializeComponent();
         }

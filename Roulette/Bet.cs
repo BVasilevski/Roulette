@@ -10,22 +10,20 @@ namespace Roulette
     {
         public int Number { get; set; }
         public int Amount { get; set; }
-
         public Bet(int number, int amount)
         {
             Number = number;
             Amount = amount;
         }
-
         public override string? ToString()
         {
             if (Number == -1)
             {
-                return $"Color: Red - Amount {Amount}";
+                return $"Color: Red - Amount: {Amount}";
             }
             else if (Number == -2)
             {
-                return $"Color: Black - Amount {Amount}";
+                return $"Color: Black - Amount: {Amount}";
             }
             else
             {

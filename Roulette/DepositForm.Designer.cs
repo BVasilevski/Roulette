@@ -1,6 +1,6 @@
 ﻿namespace Roulette
 {
-    partial class Form2
+    partial class DepositForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,43 +29,43 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            depositBtn = new Button();
-            label1 = new Label();
-            nudAmount = new NumericUpDown();
-            errorProvider1 = new ErrorProvider(components);
-            cancelBtn = new Button();
+            depositBtn = new System.Windows.Forms.Button();
+            label1 = new System.Windows.Forms.Label();
+            nudAmount = new System.Windows.Forms.NumericUpDown();
+            errorProvider1 = new System.Windows.Forms.ErrorProvider(components);
+            cancelBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)nudAmount).BeginInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
-            SuspendLayout();
+            this.SuspendLayout();
             // 
             // depositBtn
             // 
-            depositBtn.Location = new Point(12, 81);
+            depositBtn.Location = new System.Drawing.Point(12, 81);
             depositBtn.Name = "depositBtn";
-            depositBtn.Size = new Size(111, 23);
+            depositBtn.Size = new System.Drawing.Size(111, 23);
             depositBtn.TabIndex = 0;
             depositBtn.Text = "Deposit";
             depositBtn.UseVisualStyleBackColor = true;
-            depositBtn.Click += depositBtn_Click;
+            depositBtn.Click += this.depositBtn_Click;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(12, 23);
+            label1.Location = new System.Drawing.Point(12, 23);
             label1.Name = "label1";
-            label1.Size = new Size(54, 15);
+            label1.Size = new System.Drawing.Size(54, 15);
             label1.TabIndex = 1;
             label1.Text = "Amount:";
             // 
             // nudAmount
             // 
-            nudAmount.Increment = new decimal(new int[] { 50, 0, 0, 0 });
-            nudAmount.Location = new Point(72, 21);
-            nudAmount.Maximum = new decimal(new int[] { -727379968, 232, 0, 0 });
+            nudAmount.Increment = new System.Decimal(new System.Int32[] { 50, 0, 0, 0 });
+            nudAmount.Location = new System.Drawing.Point(72, 21);
+            nudAmount.Maximum = new System.Decimal(new System.Int32[] { -727379968, 232, 0, 0 });
             nudAmount.Name = "nudAmount";
-            nudAmount.Size = new Size(170, 23);
+            nudAmount.Size = new System.Drawing.Size(170, 23);
             nudAmount.TabIndex = 2;
-            nudAmount.Validating += nudAmount_Validating;
+            nudAmount.Validating += this.nudAmount_Validating;
             // 
             // errorProvider1
             // 
@@ -73,31 +73,31 @@
             // 
             // cancelBtn
             // 
-            cancelBtn.Location = new Point(129, 81);
+            cancelBtn.Location = new System.Drawing.Point(129, 81);
             cancelBtn.Name = "cancelBtn";
-            cancelBtn.Size = new Size(113, 23);
+            cancelBtn.Size = new System.Drawing.Size(113, 23);
             cancelBtn.TabIndex = 3;
             cancelBtn.Text = "Cancel";
             cancelBtn.UseVisualStyleBackColor = true;
-            cancelBtn.Click += cancelBtn_Click;
+            cancelBtn.Click += this.cancelBtn_Click;
             // 
-            // Form2
+            // DepositForm
             // 
-            AcceptButton = depositBtn;
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
-            CancelButton = cancelBtn;
-            ClientSize = new Size(265, 119);
-            Controls.Add(cancelBtn);
-            Controls.Add(nudAmount);
-            Controls.Add(label1);
-            Controls.Add(depositBtn);
-            Name = "Form2";
-            Text = "Form2";
+            this.AcceptButton = depositBtn;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = cancelBtn;
+            this.ClientSize = new System.Drawing.Size(265, 119);
+            this.Controls.Add(cancelBtn);
+            this.Controls.Add(nudAmount);
+            this.Controls.Add(label1);
+            this.Controls.Add(depositBtn);
+            this.Name = "DepositForm";
+            this.Text = "Deposit";
             ((System.ComponentModel.ISupportInitialize)nudAmount).EndInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
-            ResumeLayout(false);
-            PerformLayout();
+            this.ResumeLayout(false);
+            this.PerformLayout();
         }
 
         #endregion

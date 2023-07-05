@@ -97,14 +97,12 @@ namespace Roulette
 
             return winning;
         }   
-
         public void RemoveLastBet(Wallet w)
         {
             Bet bet = bets[bets.Count - 1];
             w.addValue(bet.Amount);
             bets.RemoveAt(bets.Count - 1);
         }
-
         public void RemoveAllBets(Wallet w)
         {
             for(int i = bets.Count - 1; i >= 0; i--)

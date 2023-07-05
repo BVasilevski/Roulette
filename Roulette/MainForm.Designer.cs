@@ -1,6 +1,6 @@
 ﻿namespace Roulette
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         ///  Required designer variable.
@@ -29,8 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            pictureBox1 = new PictureBox();
-            timer1 = new System.Windows.Forms.Timer(components);
+            wheelPictureBox = new PictureBox();
             spinButton = new Button();
             timerBall = new System.Windows.Forms.Timer(components);
             label1 = new Label();
@@ -71,7 +70,7 @@
             button20 = new Button();
             button21 = new Button();
             button19 = new Button();
-            button0 = new Button();
+            buttonGreen = new Button();
             buttonRed = new Button();
             buttonBlack = new Button();
             amountNud = new NumericUpDown();
@@ -82,23 +81,18 @@
             btnRemoveLastBet = new Button();
             btnRemoveAllBets = new Button();
             btnRules = new Button();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)wheelPictureBox).BeginInit();
             ((System.ComponentModel.ISupportInitialize)amountNud).BeginInit();
             SuspendLayout();
             // 
-            // pictureBox1
+            // wheelPictureBox
             // 
-            pictureBox1.Location = new Point(12, 83);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(27, 80);
-            pictureBox1.TabIndex = 0;
-            pictureBox1.TabStop = false;
-            pictureBox1.Paint += pictureBox1_Paint;
-            // 
-            // timer1
-            // 
-            timer1.Interval = 50;
-            timer1.Tick += timer1_Tick_1;
+            wheelPictureBox.Location = new Point(12, 83);
+            wheelPictureBox.Name = "wheelPictureBox";
+            wheelPictureBox.Size = new Size(27, 80);
+            wheelPictureBox.TabIndex = 0;
+            wheelPictureBox.TabStop = false;
+            wheelPictureBox.Paint += wheelPictureBox_Paint;
             // 
             // spinButton
             // 
@@ -108,7 +102,7 @@
             spinButton.TabIndex = 1;
             spinButton.Text = "SPIN";
             spinButton.UseVisualStyleBackColor = true;
-            spinButton.Click += button1_Click;
+            spinButton.Click += spinButton_Click;
             // 
             // timerBall
             // 
@@ -568,17 +562,17 @@
             button19.UseVisualStyleBackColor = false;
             button19.Click += button_Click;
             // 
-            // button0
+            // buttonGreen
             // 
-            button0.BackColor = Color.Green;
-            button0.ForeColor = SystemColors.ButtonFace;
-            button0.Location = new Point(924, 22);
-            button0.Name = "button0";
-            button0.Size = new Size(172, 40);
-            button0.TabIndex = 42;
-            button0.Text = "0";
-            button0.UseVisualStyleBackColor = false;
-            button0.Click += button0_Click;
+            buttonGreen.BackColor = Color.Green;
+            buttonGreen.ForeColor = SystemColors.ButtonFace;
+            buttonGreen.Location = new Point(924, 22);
+            buttonGreen.Name = "buttonGreen";
+            buttonGreen.Size = new Size(172, 40);
+            buttonGreen.TabIndex = 42;
+            buttonGreen.Text = "0";
+            buttonGreen.UseVisualStyleBackColor = false;
+            buttonGreen.Click += buttonGreen_Click;
             // 
             // buttonRed
             // 
@@ -678,11 +672,11 @@
             btnRules.Name = "btnRules";
             btnRules.Size = new Size(137, 50);
             btnRules.TabIndex = 52;
-            btnRules.Text = "Rules";
+            btnRules.Text = "Rules && How To Play";
             btnRules.UseVisualStyleBackColor = true;
             btnRules.Click += btnRules_Click;
             // 
-            // Form1
+            // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -698,7 +692,7 @@
             Controls.Add(amountNud);
             Controls.Add(buttonBlack);
             Controls.Add(buttonRed);
-            Controls.Add(button0);
+            Controls.Add(buttonGreen);
             Controls.Add(button35);
             Controls.Add(button36);
             Controls.Add(button34);
@@ -738,15 +732,13 @@
             Controls.Add(currentBetsList);
             Controls.Add(label1);
             Controls.Add(spinButton);
-            Controls.Add(pictureBox1);
+            Controls.Add(wheelPictureBox);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             MinimizeBox = false;
-            Name = "Form1";
-            Text = "Form1";
-            Paint += Form1_Paint;
-            MouseClick += Form1_MouseClick;
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            Name = "MainForm";
+            Text = "Roulette";
+            ((System.ComponentModel.ISupportInitialize)wheelPictureBox).EndInit();
             ((System.ComponentModel.ISupportInitialize)amountNud).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -759,8 +751,7 @@
 
         #endregion
 
-        private PictureBox pictureBox1;
-        private System.Windows.Forms.Timer timer1;
+        private PictureBox wheelPictureBox;
         private Button spinButton;
         private System.Windows.Forms.Timer timerBall;
         private Label label1;
@@ -801,7 +792,7 @@
         private Button button20;
         private Button button21;
         private Button button19;
-        private Button button0;
+        private Button buttonGreen;
         private Button buttonRed;
         private Button buttonBlack;
         private NumericUpDown amountNud;

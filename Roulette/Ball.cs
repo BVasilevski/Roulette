@@ -10,9 +10,7 @@ namespace Roulette
     {
         public Point Center {  get; set; }
         public Color Color { get; set; }
-
         public static int Radius { get; set; } = 10;
-
         public float RotationAngle { get; set; }
         public float RotationSpeed { get; set; }
 
@@ -32,11 +30,9 @@ namespace Roulette
         public void UpdatePosition()
         {
             RotationAngle += RotationSpeed;
-
-            // Calculate new position based on rotation angle and radius
             double radians = Math.PI * RotationAngle / 180;
-            float centerX = 500 / 2;  // Assuming ImageWidth is 500
-            float centerY = 500 / 2;  // Assuming ImageHeight is 500
+            float centerX = 500 / 2;  
+            float centerY = 500 / 2;  
             float newX = centerX + (float)(Math.Cos(radians) * 195);
             float newY = centerY + (float)(Math.Sin(radians) * 195);
 
