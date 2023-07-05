@@ -35,3 +35,5 @@ D:\Fakultet\II Godina\IV Semestar\Vizuelno Programiranje\Roulette\VPProject\Roul
 D:\Fakultet\II Godina\IV Semestar\Vizuelno Programiranje\Roulette\VPProject\Roulette\obj\Debug\net7.0-windows\Roulette.Properties.Resources.resources
 D:\Fakultet\II Godina\IV Semestar\Vizuelno Programiranje\Roulette\VPProject\Roulette\obj\Debug\net7.0-windows\Roulette.DepositForm.resources
 D:\Fakultet\II Godina\IV Semestar\Vizuelno Programiranje\Roulette\VPProject\Roulette\obj\Debug\net7.0-windows\Roulette.MainForm.resources
+D:\Fakultet\II Godina\IV Semestar\Vizuelno Programiranje\Roulette\VPProject\Roulette\obj\Debug\net7.0-windows\Roulette.Form1.resources
+D:\Fakultet\II Godina\IV Semestar\Vizuelno Programiranje\Roulette\VPProject\Roulette\obj\Debug\net7.0-windows\Roulette.Form2.resources
