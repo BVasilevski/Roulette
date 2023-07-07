@@ -24,9 +24,9 @@ namespace Roulette
             { 569, 31 },
             { 564, 14 },
             { 559, 20 },
-            { 554, 16 },
+            { 554, 1 },
             { 549, 33 },
-            { 544, 15 },
+            { 544, 16 },
             { 540, 24 },
             { 535, 5 },
             { 530, 10 },
@@ -320,18 +320,21 @@ namespace Roulette
         }
         private void spinButton_Click(object sender, EventArgs e)
         {
-            ball = new Ball(new Point(200, 65));
-            if (Betting.bets.Count > 0)
+            if (!timerBall.Enabled)
             {
-                timerBall.Start();
-                duration = tickValues[random.Next(tickValues.Count)];
-                amountNud.Value = 0;
-                ticks = 0;
-            }
-            else
-            {
-                MessageBox.Show("Please place some bets", "Place bets", MessageBoxButtons.OK);
-            }
+                ball = new Ball(new Point(200, 65));
+                if (Betting.bets.Count > 0)
+                {
+                    timerBall.Start();
+                    duration = tickValues[random.Next(tickValues.Count)];
+                    amountNud.Value = 0;
+                    ticks = 0;
+                }
+                else
+                {
+                    MessageBox.Show("Please place some bets", "Place bets", MessageBoxButtons.OK);
+                }
+            }           
             wheelPictureBox.Invalidate();
         }
     }
